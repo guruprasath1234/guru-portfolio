@@ -223,7 +223,7 @@ export default function Hero() {
 
           {/* ── Resume download strip ── */}
           <a
-            href="/resume.pdf"
+            href="/Resume.pdf"
             download="Guruprasath_M_Resume.pdf"
             className="flex items-center justify-between px-7 py-5 bg-neu-green text-white border-t-[3px] border-b-[3px] border-neu-black group transition-colors duration-150 hover:bg-neu-black"
           >
