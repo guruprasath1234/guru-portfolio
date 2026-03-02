@@ -39,8 +39,8 @@ export default function Hero() {
         🔥 Open to Full-Time Roles &amp; Internships — Feb 2026 onwards
       </div>
 
-      {/* ── Main hero grid: TEXT | PHOTO+STATS ── */}
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_460px] border-b-[3px] border-neu-black">
+      {/* ── Main hero grid — wider right column: 560px ── */}
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_560px] border-b-[3px] border-neu-black">
 
         {/* ──── LEFT: main content ──── */}
         <div className="p-8 md:p-16 flex flex-col justify-center border-b-[3px] lg:border-b-0 lg:border-r-[3px] border-neu-black relative overflow-hidden">
@@ -95,17 +95,26 @@ export default function Hero() {
             <a href={data.links.github} target="_blank" rel="noreferrer" className="neu-btn bg-white text-neu-black px-6 py-3 text-sm">
               Github ↗
             </a>
-            
+            {/* Place resume at: public/resume.pdf */}
+            <a
+              href="/resume.pdf"
+              download="Guruprasath_M_Resume.pdf"
+              className="neu-btn bg-neu-green text-white px-6 py-3 text-sm"
+            >
+              ↓ Resume
+            </a>
           </div>
         </div>
 
-        {/* ──── RIGHT: Photo + Stats ──── */}
+        {/* ──── RIGHT: Photo + Stats — wider & taller ──── */}
         <div className="flex flex-col">
 
-          {/* ── PHOTO BLOCK ── */}
-          <div className="relative border-b-[3px] border-neu-black overflow-hidden bg-neu-yellow" style={{ minHeight: '340px' }}>
-
-            {/* Neubrutalism background pattern — bold diagonal stripes */}
+          {/* ── PHOTO BLOCK — taller ── */}
+          <div
+            className="relative border-b-[3px] border-neu-black overflow-hidden bg-neu-yellow"
+            style={{ minHeight: '440px' }}
+          >
+            {/* Diagonal stripes background */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
@@ -115,13 +124,14 @@ export default function Hero() {
             />
 
             {/* Decorative corner squares */}
-            <div className="absolute top-4 left-4 w-8 h-8 bg-neu-red border-[3px] border-neu-black z-10" />
-            <div className="absolute top-4 right-4 w-8 h-8 bg-neu-blue border-[3px] border-neu-black z-10" />
-            <div className="absolute bottom-4 left-4 w-8 h-8 bg-neu-green border-[3px] border-neu-black z-10" />
+            <div className="absolute top-5 left-5 w-10 h-10 bg-neu-red border-[3px] border-neu-black z-10" />
+            <div className="absolute top-5 right-5 w-10 h-10 bg-neu-blue border-[3px] border-neu-black z-10" />
+            <div className="absolute bottom-5 left-5 w-10 h-10 bg-neu-green border-[3px] border-neu-black z-10" />
 
-            {/* GM monogram — top-right decorative label */}
-            <div className="absolute bottom-4 right-4 z-10 bg-neu-black text-neu-yellow font-display font-black text-xs px-3 py-1 border-[3px] border-neu-black"
-              style={{ boxShadow: '3px 3px 0 #FFE500' }}
+            {/* GM monogram badge */}
+            <div
+              className="absolute bottom-5 right-5 z-10 bg-neu-black text-neu-yellow font-display font-black text-sm px-4 py-2 border-[3px] border-neu-black"
+              style={{ boxShadow: '4px 4px 0 #FFE500' }}
             >
               GM/
             </div>
@@ -136,32 +146,25 @@ export default function Hero() {
             />
 
             {/* ── THE PHOTO ── */}
-            <div className="relative z-10 flex items-end justify-center h-full pt-10">
-              {/*
-                Photo frame with neubrutalist hard shadow + offset border
-                Place your photo at: public/profile.jpg
-              */}
+            <div className="relative z-10 flex items-end justify-center h-full pt-12">
               <div
                 className="relative"
-                style={{
-                  /* Offset shadow to bottom-right — classic neubrutalism */
-                  filter: 'drop-shadow(8px 8px 0px #0D0D0D)',
-                }}
+                style={{ filter: 'drop-shadow(10px 10px 0px #0D0D0D)' }}
               >
-                {/* Stacked background rectangles for depth effect */}
+                {/* Stacked offset rectangles for depth */}
                 <div
                   className="absolute bg-neu-blue border-[3px] border-neu-black"
-                  style={{ inset: 0, transform: 'translate(12px, 12px)', zIndex: 0 }}
+                  style={{ inset: 0, transform: 'translate(14px, 14px)', zIndex: 0 }}
                 />
                 <div
                   className="absolute bg-neu-red border-[3px] border-neu-black"
-                  style={{ inset: 0, transform: 'translate(6px, 6px)', zIndex: 1 }}
+                  style={{ inset: 0, transform: 'translate(7px, 7px)', zIndex: 1 }}
                 />
 
-                {/* Photo */}
+                {/* Photo — larger size */}
                 <div
                   className="relative border-[3px] border-neu-black overflow-hidden bg-white"
-                  style={{ width: 220, height: 270, zIndex: 2 }}
+                  style={{ width: 280, height: 340, zIndex: 2 }}
                 >
                   <Image
                     src="/profile.jpg.jpeg"
@@ -171,9 +174,10 @@ export default function Hero() {
                     priority
                   />
 
-                  {/* Fallback placeholder shown if image is missing */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/90 text-neu-black font-display font-black text-4xl select-none"
-                    style={{ display: 'none' /* remove this line once you add your photo */ }}
+                  {/* Fallback placeholder */}
+                  <div
+                    className="absolute inset-0 flex flex-col items-center justify-center bg-white/90 text-neu-black font-display font-black text-4xl select-none"
+                    style={{ display: 'none' }}
                   >
                     GM
                     <span className="text-xs font-mono font-normal mt-2 opacity-50">Add profile.jpg</span>
@@ -184,17 +188,17 @@ export default function Hero() {
 
             {/* Name tag floating bottom-left */}
             <div
-              className="absolute bottom-5 left-14 z-20 bg-white border-[3px] border-neu-black px-3 py-1.5"
-              style={{ boxShadow: '4px 4px 0 #0D0D0D' }}
+              className="absolute bottom-6 left-20 z-20 bg-white border-[3px] border-neu-black px-4 py-2"
+              style={{ boxShadow: '5px 5px 0 #0D0D0D' }}
             >
-              <div className="font-display font-black text-xs uppercase tracking-wider leading-tight">
+              <div className="font-display font-black text-sm uppercase tracking-wider leading-tight">
                 Guruprasath M
               </div>
-              <div className="text-[9px] font-mono opacity-50 uppercase tracking-widest">Full Stack Dev</div>
+              <div className="text-[10px] font-mono opacity-50 uppercase tracking-widest mt-0.5">Full Stack Dev</div>
             </div>
           </div>
 
-          {/* ── STAT CARDS ── */}
+          {/* ── STAT CARDS — bigger padding ── */}
           <StatCard
             label="Current Role"
             value="Full Stack Dev Intern"
@@ -210,23 +214,42 @@ export default function Hero() {
             icon="🎓"
           />
           <StatCard
-            label="Problems Solved"
-            value="700+ on SkillRack"
-            sub="SIH 2024 Grand Finalist"
+            label="Coding & Recognition"
+            value="700+ Problems · SIH Grand Finalist"
+            sub="SkillRack · HackerRank · SIH 2024"
             bg="bg-neu-red text-white"
             icon="🏆"
           />
+
+          {/* ── Resume download strip ── */}
+          <a
+            href="/resume.pdf"
+            download="Guruprasath_M_Resume.pdf"
+            className="flex items-center justify-between px-7 py-5 bg-neu-green text-white border-t-[3px] border-b-[3px] border-neu-black group transition-colors duration-150 hover:bg-neu-black"
+          >
+            <div>
+              <div className="font-display font-black text-sm uppercase tracking-widest leading-tight">
+                ↓ Download Resume
+              </div>
+              <div className="text-[11px] font-mono opacity-70 mt-1">Guruprasath_M_Resume.pdf</div>
+            </div>
+            <div
+              className="w-11 h-11 border-[3px] border-white flex items-center justify-center font-black text-lg flex-shrink-0 group-hover:bg-neu-yellow group-hover:text-neu-black group-hover:border-neu-yellow transition-all duration-150"
+            >
+              ↓
+            </div>
+          </a>
 
           {/* Language strip */}
           <div className="flex border-t-[3px] border-neu-black">
             {data.languages.map((lang, i) => (
               <div
                 key={lang}
-                className={`flex-1 p-3 text-center border-r-[3px] border-neu-black last:border-r-0 ${
+                className={`flex-1 py-4 px-2 text-center border-r-[3px] border-neu-black last:border-r-0 ${
                   i % 2 === 0 ? 'bg-neu-yellow' : 'bg-white'
                 }`}
               >
-                <div className="text-[9px] font-bold uppercase tracking-widest opacity-70">{lang}</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest opacity-70">{lang}</div>
               </div>
             ))}
           </div>
@@ -265,13 +288,13 @@ function StatCard({
 }) {
   return (
     <div
-      className={`flex items-center gap-4 px-6 py-5 border-b-[3px] border-neu-black ${bg} group transition-all duration-150 hover:-translate-x-1`}
+      className={`flex items-center gap-5 px-7 py-6 border-b-[3px] border-neu-black ${bg} group transition-all duration-150 hover:-translate-x-1`}
     >
-      <div className="text-2xl">{icon}</div>
+      <div className="text-3xl flex-shrink-0">{icon}</div>
       <div className="flex-1 min-w-0">
         <div className="text-[10px] font-bold uppercase tracking-widest opacity-60 mb-0.5">{label}</div>
-        <div className="font-display font-bold text-sm leading-tight">{value}</div>
-        <div className="text-[11px] opacity-60">{sub}</div>
+        <div className="font-display font-bold text-base leading-tight">{value}</div>
+        <div className="text-xs opacity-60 mt-0.5">{sub}</div>
       </div>
     </div>
   )
