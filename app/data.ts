@@ -6,7 +6,7 @@ export const data = {
   phone: '+91 7550122892',
   location: 'Hosur, Tamilnadu',
   links: {
-    linkedin: 'https://linkedin.com/in/guru-prasath-2552b4248',
+    linkedin: 'https://www.linkedin.com/in/guruprasath-m-2552b4248',
     github: 'https://github.com/guruprasath1234',
     portfolio: 'https://guruprasath.vercel.app',
     behance: 'https://behance.net/guruprasath-m',
@@ -16,8 +16,8 @@ export const data = {
       role: 'Full Stack Developer Intern',
       company: 'Gleamator Technologies',
       location: 'Bangalore',
-      period: 'Feb 2026 – Present',
-      stack: ['Python', 'MySQL', 'HTML5', 'CSS3'],
+      period: 'Feb 2026 – May 2026',
+      stack: ['Python', 'MySQL', 'HTML5', 'CSS3','React.js', 'Next.js','Django','Bootstrap'],
       description:
         'Building and maintaining production-grade web applications. Translating academic knowledge into scalable, real-world solutions across the full stack.',
     },
