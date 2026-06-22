@@ -1,4 +1,6 @@
+'use client'
 import { data } from '../data'
+import { useTheme } from './ThemeProvider'
 
 // Add links to your achievements data — update data.ts accordingly
 // Each achievement can optionally have a `link` and `linkLabel` field
@@ -10,11 +12,16 @@ const achievementLinks: { link?: string; linkLabel?: string }[] = [
 ]
 
 export default function Achievements() {
+  const { mode } = useTheme()
+  const isMono = mode === 'mono'
+
   return (
     <section className="border-b-[3px] border-neu-black">
       {/* Header */}
       <div className="flex items-center gap-4 px-8 py-4 bg-neu-black border-b-[3px] border-neu-black">
-        <span className="font-display font-black text-neu-yellow text-xs tracking-widest uppercase bg-neu-purple px-2 py-1">05</span>
+        <span className={`font-display font-black text-xs tracking-widest uppercase px-2 py-1 ${
+          isMono ? 'bg-white text-neu-black' : 'text-neu-yellow bg-neu-purple'
+        }`}>05</span>
         <span className="font-display font-black text-white text-sm uppercase tracking-widest">Achievements</span>
         <div className="flex-1 border-t-[2px] border-dashed border-white/20" />
         <span className="text-white/40 text-xs font-mono">// wins & recognition</span>
@@ -23,13 +30,24 @@ export default function Achievements() {
       {/* Achievement cards */}
       <div className="grid grid-cols-1 md:grid-cols-2">
         {data.achievements.map((a, i) => {
-          const accents = ['bg-white', 'bg-neu-yellow', 'bg-white', 'bg-neu-green']
-          const btnStyles = [
+          const colorAccents = ['bg-white', 'bg-neu-yellow', 'bg-white', 'bg-neu-green']
+          const monoAccents = ['bg-white', 'bg-neu-black text-white', 'bg-gray-50', 'bg-neu-black text-white']
+
+          const colorBtnStyles = [
             'bg-neu-blue text-white hover:bg-neu-black',
             'bg-neu-black text-neu-yellow hover:bg-neu-blue hover:text-white',
             'bg-neu-purple text-white hover:bg-neu-black',
             'bg-neu-black text-white hover:bg-neu-red',
           ]
+          const monoBtnStyles = [
+            'bg-neu-black text-white hover:bg-gray-700',
+            'bg-white text-neu-black hover:bg-gray-200',
+            'bg-neu-black text-white hover:bg-gray-700',
+            'bg-white text-neu-black hover:bg-gray-200',
+          ]
+
+          const accents = isMono ? monoAccents : colorAccents
+          const btnStyles = isMono ? monoBtnStyles : colorBtnStyles
           const meta = achievementLinks[i] ?? {}
 
           return (
@@ -80,13 +98,22 @@ export default function Achievements() {
         </div>
         <div className="flex flex-wrap">
           {['Communication', 'Teamwork', 'Leadership', 'Adaptability', 'Problem-Solving'].map((s, i) => {
-            const bgs = [
+            const colorBgs = [
               'bg-neu-blue text-white',
               'bg-neu-yellow',
               'bg-neu-red text-white',
               'bg-white',
               'bg-neu-green text-white',
             ]
+            const monoBgs = [
+              'bg-neu-black text-white',
+              'bg-white',
+              'bg-neu-black text-white',
+              'bg-white',
+              'bg-neu-black text-white',
+            ]
+            const bgs = isMono ? monoBgs : colorBgs
+
             return (
               <div
                 key={s}

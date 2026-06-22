@@ -6,7 +6,26 @@
 @tailwind utilities;
 
 
+/* ── Default: Mono (Black / White) ── */
 :root {
+  --bg: #FFFFFF;
+  --black: #0D0D0D;
+  --yellow: #FFFFFF;
+  --red: #0D0D0D;
+  --blue: #0D0D0D;
+  --green: #0D0D0D;
+  --purple: #0D0D0D;
+  --orange: #0D0D0D;
+  --accent: #FFFFFF;
+  --accent-text: #0D0D0D;
+  --border: 3px solid #0D0D0D;
+  --shadow: 4px 4px 0 #0D0D0D;
+  --shadow-md: 6px 6px 0 #0D0D0D;
+  --shadow-lg: 10px 10px 0 #0D0D0D;
+}
+
+/* ── Color Theme Override ── */
+[data-theme="color"] {
   --bg: #F5F0E8;
   --black: #0D0D0D;
   --yellow: #FFE500;
@@ -15,10 +34,8 @@
   --green: #00C853;
   --purple: #7C3AED;
   --orange: #FF6B00;
-  --border: 3px solid #0D0D0D;
-  --shadow: 4px 4px 0 #0D0D0D;
-  --shadow-md: 6px 6px 0 #0D0D0D;
-  --shadow-lg: 10px 10px 0 #0D0D0D;
+  --accent: #FFE500;
+  --accent-text: #0D0D0D;
 }
 
 * {
@@ -34,6 +51,7 @@ body {
   color: var(--black);
   font-family: 'Space Mono', monospace;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Scrollbar */
@@ -106,7 +124,7 @@ body::before {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    transition: transform 0.15s, box-shadow 0.15s;
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.4s, color 0.4s;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -126,13 +144,128 @@ body::before {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     background: #0D0D0D;
-    color: #FFE500;
+    color: var(--yellow);
     padding: 0.25rem 0.75rem;
     display: inline-block;
+    transition: color 0.4s ease;
   }
   .font-display {
     font-family: 'Unbounded', sans-serif;
   }
+}
+
+/* ── THEME TOGGLE BUTTON ── */
+.theme-toggle {
+  position: relative;
+  width: 56px;
+  height: 30px;
+  border: 3px solid #0D0D0D;
+  background: #FFFFFF;
+  box-shadow: 3px 3px 0 #0D0D0D;
+  transition: background 0.3s ease, box-shadow 0.15s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #0D0D0D;
+}
+
+.theme-toggle:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 #0D0D0D;
+}
+
+.theme-toggle[data-active="true"] {
+  background: #FFE500;
+}
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: #0D0D0D;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+}
+
+.theme-toggle[data-active="true"] .theme-toggle-knob {
+  transform: translateX(26px);
+}
+
+.theme-toggle-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  line-height: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  font-weight: 900;
+  font-family: 'Space Mono', monospace;
+}
+
+.theme-toggle-icon--mono {
+  left: 6px;
+  opacity: 1;
+}
+
+.theme-toggle-icon--color {
+  right: 6px;
+  opacity: 0;
+}
+
+.theme-toggle[data-active="true"] .theme-toggle-icon--mono {
+  opacity: 0;
+}
+
+.theme-toggle[data-active="true"] .theme-toggle-icon--color {
+  opacity: 1;
+}
+
+/* ── Mono theme overrides for Tailwind color classes ── */
+/* These use data-theme to override Tailwind's bg-neu-* colors */
+
+/* Background colors */
+[data-theme="mono"] .bg-neu-yellow { background-color: #FFFFFF !important; }
+[data-theme="mono"] .bg-neu-red { background-color: #0D0D0D !important; }
+[data-theme="mono"] .bg-neu-blue { background-color: #0D0D0D !important; }
+[data-theme="mono"] .bg-neu-green { background-color: #0D0D0D !important; }
+[data-theme="mono"] .bg-neu-purple { background-color: #0D0D0D !important; }
+[data-theme="mono"] .bg-neu-orange { background-color: #0D0D0D !important; }
+[data-theme="mono"] .bg-neu-bg { background-color: #FFFFFF !important; }
+
+/* Text colors */
+[data-theme="mono"] .text-neu-yellow { color: #FFFFFF !important; }
+[data-theme="mono"] .text-neu-red { color: #0D0D0D !important; }
+[data-theme="mono"] .text-neu-blue { color: #0D0D0D !important; }
+[data-theme="mono"] .text-neu-green { color: #0D0D0D !important; }
+[data-theme="mono"] .text-neu-purple { color: #0D0D0D !important; }
+[data-theme="mono"] .text-neu-orange { color: #0D0D0D !important; }
+
+/* Border colors */
+[data-theme="mono"] .border-neu-yellow { border-color: #0D0D0D !important; }
+
+/* Hover states for mono */
+[data-theme="mono"] .hover\:bg-neu-yellow:hover { background-color: #E5E5E5 !important; }
+[data-theme="mono"] .hover\:bg-neu-red:hover { background-color: #333333 !important; }
+[data-theme="mono"] .hover\:bg-neu-blue:hover { background-color: #333333 !important; }
+[data-theme="mono"] .hover\:bg-neu-green:hover { background-color: #333333 !important; }
+[data-theme="mono"] .hover\:bg-neu-purple:hover { background-color: #333333 !important; }
+[data-theme="mono"] .hover\:text-neu-yellow:hover { color: #FFFFFF !important; }
+
+/* Smooth transitions for theme switching */
+[data-theme] section,
+[data-theme] div,
+[data-theme] span,
+[data-theme] a,
+[data-theme] nav,
+[data-theme] h1,
+[data-theme] h2,
+[data-theme] h3,
+[data-theme] p {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
 /* Marquee */

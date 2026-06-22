@@ -1,12 +1,14 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useTheme } from './ThemeProvider'
 
 const links = ['Skills', 'Projects', 'Experience', 'Education', 'Contact']
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { mode, toggle } = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -26,31 +28,63 @@ export default function Navbar() {
             GM<span className="text-neu-red">/</span>
           </div>
 
-          {/* Desktop links */}
-          <ul className="hidden md:flex">
-            {links.map((link, i) => (
-              <li key={link}>
-                <Link
-                  href={`#${link.toLowerCase()}`}
-                  className="block px-4 py-2 text-xs font-bold uppercase tracking-widest border-[3px] border-neu-black -ml-[3px] hover:bg-neu-black hover:text-neu-yellow transition-colors"
-                  style={{ borderLeft: i === 0 ? '3px solid #0D0D0D' : undefined }}
-                >
-                  {link}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {/* Desktop: Toggle + links */}
+          <div className="hidden md:flex items-center gap-0">
+            {/* Theme Toggle — first */}
+            <div className="mr-4 flex items-center gap-2">
+              <button
+                aria-label="Toggle color theme"
+                className="theme-toggle"
+                data-active={mode === 'color'}
+                onClick={toggle}
+              >
+                <span className="theme-toggle-icon theme-toggle-icon--mono">◐</span>
+                <span className="theme-toggle-icon theme-toggle-icon--color">✦</span>
+                <div className="theme-toggle-knob" />
+              </button>
+              <span className="text-[9px] font-bold uppercase tracking-widest opacity-50 hidden lg:block">
+                {mode === 'mono' ? 'B/W' : 'CLR'}
+              </span>
+            </div>
 
-          {/* Mobile hamburger */}
-          <button
-            aria-label="Toggle menu"
-            className="md:hidden w-10 h-10 border-[3px] border-neu-black bg-neu-yellow flex flex-col justify-center items-center gap-1 neu-shadow"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span className={`block w-5 h-[3px] bg-neu-black transition-all ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-            <span className={`block w-5 h-[3px] bg-neu-black transition-all ${menuOpen ? 'opacity-0' : ''}`} />
-            <span className={`block w-5 h-[3px] bg-neu-black transition-all ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
-          </button>
+            <ul className="flex">
+              {links.map((link, i) => (
+                <li key={link}>
+                  <Link
+                    href={`#${link.toLowerCase()}`}
+                    className="block px-4 py-2 text-xs font-bold uppercase tracking-widest border-[3px] border-neu-black -ml-[3px] hover:bg-neu-black hover:text-neu-yellow transition-colors"
+                    style={{ borderLeft: i === 0 ? '3px solid #0D0D0D' : undefined }}
+                  >
+                    {link}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Mobile: toggle + hamburger */}
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              aria-label="Toggle color theme"
+              className="theme-toggle"
+              data-active={mode === 'color'}
+              onClick={toggle}
+            >
+              <span className="theme-toggle-icon theme-toggle-icon--mono">◐</span>
+              <span className="theme-toggle-icon theme-toggle-icon--color">✦</span>
+              <div className="theme-toggle-knob" />
+            </button>
+
+            <button
+              aria-label="Toggle menu"
+              className="w-10 h-10 border-[3px] border-neu-black bg-neu-yellow flex flex-col justify-center items-center gap-1 neu-shadow"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span className={`block w-5 h-[3px] bg-neu-black transition-all ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+              <span className={`block w-5 h-[3px] bg-neu-black transition-all ${menuOpen ? 'opacity-0' : ''}`} />
+              <span className={`block w-5 h-[3px] bg-neu-black transition-all ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+            </button>
+          </div>
         </div>
       </nav>
 
