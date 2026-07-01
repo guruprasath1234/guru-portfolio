@@ -95,7 +95,7 @@ export const data = {
     {
       degree: 'B.E — Computer Science Engineering',
       school: 'Sri Sairam College of Engineering, Anekal, Bangalore',
-      score: 'CGPA: 7.486',
+      score: 'CGPA: 7.68',
       period: '2022 – 2026',
     },
     {

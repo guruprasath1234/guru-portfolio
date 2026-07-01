@@ -3,12 +3,12 @@ import './globals.css'
 import ThemeProvider from './components/ThemeProvider'
 
 export const metadata: Metadata = {
-  title: 'Guruprasath M — Full Stack Developer',
-  description: 'Portfolio of Guruprasath M — Aspiring Software Developer specializing in React, Next.js, and full-stack web applications.',
+  title: 'Guruprasath M - Full Stack Developer',
+  description: 'Portfolio of Guruprasath M - Aspiring Software Developer specializing in React, Next.js, and full-stack web applications.',
   keywords: ['Guruprasath', 'Full Stack Developer', 'React', 'Next.js', 'Portfolio'],
   openGraph: {
-    title: 'Guruprasath M — Full Stack Developer',
-    description: 'Portfolio of Guruprasath M — Aspiring Software Developer',
+    title: 'Guruprasath M - Full Stack Developer',
+    description: 'Portfolio of Guruprasath M - Aspiring Software Developer',
     type: 'website',
   },
   icons: {

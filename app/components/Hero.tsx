@@ -208,7 +208,7 @@ export default function Hero() {
           />
           <StatCard
             label="Education"
-            value="B.E CSE · CGPA 7.486"
+            value="B.E CSE · CGPA 7.68"
             sub="Sri Sairam College, Bangalore"
             bg="bg-neu-blue text-white"
             icon="🎓"

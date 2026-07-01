@@ -3,12 +3,37 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useTheme } from './ThemeProvider'
 
-const links = ['Skills', 'Projects', 'Experience', 'Education', 'Contact']
+const links = ['Experience', 'Skills', 'Projects', 'Education', 'Contact']
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(false)
   const { mode, toggle } = useTheme()
+
+  // Show tooltip on first load, hide after 6s or on click
+  useEffect(() => {
+    const dismissed = sessionStorage.getItem('tooltip-dismissed')
+    if (!dismissed) {
+      const showTimer = setTimeout(() => setShowTooltip(true), 800)
+      return () => clearTimeout(showTimer)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (showTooltip) {
+      const hideTimer = setTimeout(() => {
+        setShowTooltip(false)
+        sessionStorage.setItem('tooltip-dismissed', 'true')
+      }, 6000)
+      return () => clearTimeout(hideTimer)
+    }
+  }, [showTooltip])
+
+  const dismissTooltip = () => {
+    setShowTooltip(false)
+    sessionStorage.setItem('tooltip-dismissed', 'true')
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -31,12 +56,12 @@ export default function Navbar() {
           {/* Desktop: Toggle + links */}
           <div className="hidden md:flex items-center gap-0">
             {/* Theme Toggle — first */}
-            <div className="mr-4 flex items-center gap-2">
+            <div className="mr-4 flex items-center gap-2 relative">
               <button
                 aria-label="Toggle color theme"
                 className="theme-toggle"
                 data-active={mode === 'color'}
-                onClick={toggle}
+                onClick={() => { toggle(); dismissTooltip(); }}
               >
                 <span className="theme-toggle-icon theme-toggle-icon--mono">◐</span>
                 <span className="theme-toggle-icon theme-toggle-icon--color">✦</span>
@@ -45,6 +70,19 @@ export default function Navbar() {
               <span className="text-[9px] font-bold uppercase tracking-widest opacity-50 hidden lg:block">
                 {mode === 'mono' ? 'B/W' : 'CLR'}
               </span>
+
+              {/* Tooltip arrow pointing to toggle */}
+              {showTooltip && (
+                <div
+                  className="tooltip-arrow-container"
+                  onClick={dismissTooltip}
+                >
+                  <div className="tooltip-bubble">
+                    Make the portfolio colourful! ✨
+                  </div>
+                  <div className="tooltip-arrow-pointer">↑</div>
+                </div>
+              )}
             </div>
 
             <ul className="flex">
@@ -63,17 +101,32 @@ export default function Navbar() {
           </div>
 
           {/* Mobile: toggle + hamburger */}
-          <div className="md:hidden flex items-center gap-3">
-            <button
-              aria-label="Toggle color theme"
-              className="theme-toggle"
-              data-active={mode === 'color'}
-              onClick={toggle}
-            >
-              <span className="theme-toggle-icon theme-toggle-icon--mono">◐</span>
-              <span className="theme-toggle-icon theme-toggle-icon--color">✦</span>
-              <div className="theme-toggle-knob" />
-            </button>
+          <div className="md:hidden flex items-center gap-3 relative">
+            <div className="relative">
+              <button
+                aria-label="Toggle color theme"
+                className="theme-toggle"
+                data-active={mode === 'color'}
+                onClick={() => { toggle(); dismissTooltip(); }}
+              >
+                <span className="theme-toggle-icon theme-toggle-icon--mono">◐</span>
+                <span className="theme-toggle-icon theme-toggle-icon--color">✦</span>
+                <div className="theme-toggle-knob" />
+              </button>
+
+              {/* Mobile tooltip */}
+              {showTooltip && (
+                <div
+                  className="tooltip-arrow-container tooltip-arrow-container--mobile"
+                  onClick={dismissTooltip}
+                >
+                  <div className="tooltip-bubble">
+                    Make it colourful! ✨
+                  </div>
+                  <div className="tooltip-arrow-pointer">↑</div>
+                </div>
+              )}
+            </div>
 
             <button
               aria-label="Toggle menu"
